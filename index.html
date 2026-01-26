@@ -77,7 +77,7 @@ async function callApi() {
     console.log('Inside https://cloud.samsara.com............');
     try {
       const res = await fetch(
-        `/api/live-share-clound?uuid=${encodeURIComponent(url)}`
+        `/api/live-share-clound?uuid=${updatedKeys}`
       );
       const data = await res.json();
       out.textContent = JSON.stringify(data, null, 2);
