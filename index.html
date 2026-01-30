@@ -34,9 +34,13 @@
 function isAllowedUrl(url) {
   try {
     const parsed = new URL(url);
+    const hostname = parsed.hostname;
+
     return (
-      parsed.origin === "https://cloud.samsara.com" ||
-      parsed.origin === "https://tracking.gomotive.com"
+      hostname === "cloud.samsara.com" ||
+      hostname.endsWith(".cloud.samsara.com") ||
+      hostname === "tracking.gomotive.com" ||
+      hostname.endsWith(".gomotive.com")
     );
   } catch {
     return false;
