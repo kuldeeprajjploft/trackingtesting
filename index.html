@@ -67,7 +67,10 @@ async function callApi() {
   console.log('Split............');
   console.log(updatedKeys);
   const parsed = new URL(url);
-  if(parsed.origin === "https://tracking.gomotive.com") {
+  if (parsed.protocol === "https:" && (
+    parsed.hostname === "tracking.gomotive.com" ||
+    parsed.hostname.endsWith(".gomotive.com")
+  )) {
     try {
       const res = await fetch(
         `/api/live-share?uuid=${updatedKeys}`
