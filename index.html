@@ -26,11 +26,12 @@
   style="width:100%"
   placeholder="Paste Live Share URL"
 />
-<button onclick="callApi()">Get Live Share</button>
+<button onclick="startAutoRefresh()">Get Live Share</button>
 
 <pre id="out">Waiting...</pre>
 
 <script>
+let autoRefreshTimer = null;
 function isAllowedUrl(url) {
   try {
     const parsed = new URL(url);
@@ -112,6 +113,18 @@ function extractLastId(url) {
   }
 }
 
+function startAutoRefresh() {
+	  // call API immediately on first click
+	  callApi();
+	  // prevent multiple intervals
+	  if (autoRefreshTimer) {
+		clearInterval(autoRefreshTimer);
+	  }
+	  // auto refresh every 2 minutes
+	  autoRefreshTimer = setInterval(() => {
+		callApi();
+	  }, 60 * 1000);
+}
 
 </script>
 
